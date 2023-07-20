@@ -13,18 +13,18 @@ SEO: 100 :1st_place_medal:
 
 ![image](https://github.com/roman-pendrak/Developer-Homepage-Template/assets/79618125/d3133aac-c0fe-480b-96cb-12202b87afee)
 
-# Install Node 18+, clone the project, install packages, and run ! :zap: 
+# Install Node 18+, clone, build, and run! :zap: 
 Node Version Manager For Windows: https://github.com/coreybutler/nvm-windows/releases
 ```bash
-# install packages
+# build
 $ npm install
 
 # run dev mode
 $ npm run dev
 
-# create production build
+# production build
 $ npm run build
 
-# run production mode
+# run production build
 $ npm run preview
 ```
