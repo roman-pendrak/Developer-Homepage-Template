@@ -9,7 +9,6 @@ import IconButton from "@mui/material/IconButton";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Slide from "@mui/material/Slide";
 import { Theme } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
@@ -30,7 +29,6 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import ForwardIcon from "@mui/icons-material/Forward";
 
 // Email
 import emailjs from "@emailjs/browser";
@@ -39,16 +37,15 @@ import emailjs from "@emailjs/browser";
 import { enqueueSnackbar } from "notistack";
 
 // Images & CSS
-import firstLastLogo from "../assets/firstLastLogo.png";
-import usa from "../assets/usa.png";
+// TODO - Uncomment next line after adding profile image
+// import profile from "../assets/profile-transparent.png";
 import "../Home.css";
 import {
   projectList,
   skills,
   fullName,
-  location1,
-  location2,
-  jobTitle,
+  location,
+  occupation,
   greeting,
   aboutMe,
   socialMedia,
@@ -62,55 +59,30 @@ import SocialMediaIcon from "../components/SocialMediaIcon";
 
 const pages = ["Home", "About", "Projects", "Contact"];
 
-function Home() {
-  const [showName, setShowName] = useState(false);
-  const [showSlideLeft, setShowSlideLeft] = useState(false);
-  const [showSlideRight, setShowSlideRight] = useState(false);
-  const [showLinks, setShowLinks] = useState(false);
-  const [showScroll, setShowScroll] = useState(false);
-  const [customColor] = useState("#005b96");
+const customColor = "#005b96";
 
-  const slideDelay = 2000;
-  const slideDelay2 = 3000;
-  const slideDelay3 = 4000;
-  const slideDelay4 = 5000;
-  const slideDelay5 = 6000;
+function Home() {
+  const [showScroll, setShowScroll] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
-    const name = setTimeout(() => {
-      setShowName(true);
-    }, slideDelay);
-
-    const slideLeft = setTimeout(() => {
-      setShowSlideLeft(true);
-    }, slideDelay2);
-
-    const slideRight = setTimeout(() => {
-      setShowSlideRight(true);
-    }, slideDelay3);
-
     const growLinks = setTimeout(() => {
-      setShowLinks(true);
       document.body.style.cursor = "auto";
-    }, slideDelay4);
+    }, 3000);
 
     const enableScroll = setTimeout(() => {
       setShowScroll(true);
       document.body.style.overflow = "auto";
-    }, slideDelay5);
+    }, 3000);
 
     return () => {
-      clearTimeout(name);
-      clearTimeout(slideLeft);
-      clearTimeout(slideRight);
       clearTimeout(growLinks);
       clearTimeout(enableScroll);
     };
-  }, [slideDelay, slideDelay2, slideDelay3, slideDelay4, slideDelay5]);
+  }, []);
 
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -169,12 +141,13 @@ function Home() {
                 }}
               >
                 <Avatar
-                  src={firstLastLogo}
+                  // TODO - Uncomment next line after adding profile image
+                  // src={profile}
                   alt="avatar image"
                   sx={{
-                    width: 44,
-                    height: 44,
-                    backgroundColor: customColor,
+                    width: 60,
+                    height: 60,
+                    backgroundColor: "#005b96",
                   }}
                 />
                 <Typography
@@ -185,7 +158,17 @@ function Home() {
                     paddingLeft: { xs: "10px", md: "20px" },
                   }}
                 >
-                  {fullName.toUpperCase()}
+                  {fullName}
+                  <br></br>
+                  <Typography
+                    component="span"
+                    sx={{
+                      fontSize: "12px",
+                      color: "white",
+                    }}
+                  >
+                    {location}
+                  </Typography>
                 </Typography>
               </IconButton>
               <Box
@@ -204,6 +187,7 @@ function Home() {
                     <Button
                       name={page}
                       sx={{
+                        textTransform: "none",
                         fontSize: "18px",
                         m: 3,
                         color: "white",
@@ -239,9 +223,10 @@ function Home() {
           height: { xs: "90vh", md: "90vh" },
           display: "flex",
           alignItems: "center",
+          paddingBottom: { xs: "15vh", md: "0px" },
         }}
       >
-        <Grow in={showLinks} timeout={1000}>
+        <Grow in={true} timeout={4500}>
           <Box
             sx={{
               display: { xs: "none", md: "flex" },
@@ -279,102 +264,20 @@ function Home() {
         >
           <Grow in={true} timeout={4500}>
             <Typography
+              variant="h1"
               component="span"
               sx={{
                 fontWeight: "bold",
-                fontSize: { xs: "28px", md: "75px" },
+                fontSize: { xs: "50px", md: "100px" },
               }}
             >
-              <Box
-                component="span"
-                color={`${customColor}`}
-                className="font-mono"
-              >
-                {"<"}
-              </Box>
               {fullName}&nbsp;
-              <Box
-                component="span"
-                color={`${customColor}`}
-                className="font-mono"
-              >
-                {"/>"}
-              </Box>
             </Typography>
           </Grow>
-          <Box component="div" className="flex">
-            <Box
-              component="div"
-              style={{ visibility: showName ? "visible" : "hidden" }}
-            >
-              <Slide in={showName} timeout={1000} direction="right">
-                <Typography
-                  sx={{ fontSize: { xs: "12px", md: "20px" } }}
-                  color="primary"
-                >
-                  <Box component="span" className="font-bold">
-                    <img
-                      src={usa}
-                      className="mr-2 inline-block"
-                      alt={location1}
-                      height={smallScreen ? "24px" : "32px"}
-                      width={smallScreen ? "24px" : "32px"}
-                    />
-                    {location1}
-                    <ForwardIcon
-                      className="md:mx-2"
-                      sx={{ color: `${customColor}` }}
-                    />
-                  </Box>
-                </Typography>
-              </Slide>
-            </Box>
-            <Box
-              component="div"
-              style={{ visibility: showSlideLeft ? "visible" : "hidden" }}
-            >
-              <Slide in={showSlideLeft} timeout={1000} direction="left">
-                <Typography
-                  sx={{ fontSize: { xs: "12px", md: "20px" } }}
-                  color="primary"
-                >
-                  <Box component="span" className="font-bold">
-                    {location2}
-                    <img
-                      src={usa}
-                      className="ml-2 inline-block"
-                      alt={location1}
-                      height={smallScreen ? "24px" : "32px"}
-                      width={smallScreen ? "24px" : "32px"}
-                    />
-                  </Box>
-                </Typography>
-              </Slide>
-            </Box>
-          </Box>
-          <Slide in={showSlideRight} timeout={1000} direction="up">
-            <Chip
-              sx={{
-                backgroundColor: `${customColor}33`,
-                marginTop: "10px",
-                padding: "2px",
-              }}
-              label={
-                <Typography
-                  component="span"
-                  sx={{
-                    fontSize: { xs: "12px", md: "16px" },
-                    fontWeight: "bold",
-                  }}
-                >
-                  <Box component="span" color={`${customColor}`}>
-                    {jobTitle}
-                  </Box>
-                </Typography>
-              }
-            />
-          </Slide>
-          <Grow in={showLinks} timeout={1000}>
+          <Grow in={true} timeout={4500}>
+            <Typography>{occupation}</Typography>
+          </Grow>
+          <Grow in={true} timeout={4500}>
             <Link aria-label="projects" href="#projects">
               <Button
                 name="projects and contributions"
@@ -460,7 +363,7 @@ function Home() {
               variant="h4"
               sx={{ fontWeight: "bold", textAlign: "center" }}
             >
-              ABOUT ME
+              About Me
             </Typography>
             <Box
               component="div"
@@ -530,20 +433,22 @@ function Home() {
                       );
                     })}
                   </Typography>
-                  <Button
-                    name="contact me"
-                    variant="contained"
-                    sx={{
-                      backgroundColor: `${customColor}`,
-                      fontSize: "18px",
-                      fontWeight: "bold",
-                      marginTop: "50px",
-                      paddingX: "35px",
-                      paddingY: "15px",
-                    }}
-                  >
-                    Contact Me
-                  </Button>
+                  <Link key="#contact" aria-label="#contact" href="#contact">
+                    <Button
+                      name="contact me"
+                      variant="contained"
+                      sx={{
+                        backgroundColor: `${customColor}`,
+                        fontSize: "18px",
+                        fontWeight: "bold",
+                        marginTop: "50px",
+                        paddingX: "35px",
+                        paddingY: "15px",
+                      }}
+                    >
+                      Contact Me
+                    </Button>
+                  </Link>
                 </Box>
                 <Box
                   flex="1"
@@ -853,7 +758,6 @@ function Home() {
                         variant: "success",
                       });
                     });
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 } catch (error: any) {
                   enqueueSnackbar(error, {
                     variant: "error",

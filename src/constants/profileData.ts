@@ -1,8 +1,7 @@
 // General Information
 const fullName = "First Last";
-const location1 = "Location 1";
-const location2 = "Location 2";
-const jobTitle = "Job Title";
+const location = "Location 1";
+const occupation = "Occupation";
 const greeting = "Greeting (Hello!)";
 const aboutMe = [
   "Lorem ipsum dolor sit amet. Sed sunt nulla aut reprehenderit eveniet quo corrupti internos cum unde voluptatum sit iste architecto! Et suscipit aliquid et nemo Quis aut nemo nemo est alias laboriosam ad unde suscipit. In facilis internos aut pariatur velit et enim quisquam.",
@@ -140,9 +139,8 @@ export {
   projectList,
   skills,
   fullName,
-  location1,
-  location2,
-  jobTitle,
+  location,
+  occupation,
   greeting,
   aboutMe,
   socialMedia,

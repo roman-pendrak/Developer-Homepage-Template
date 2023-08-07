@@ -11,7 +11,10 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Fira Sans, sans-serif",
+    fontFamily: "Roboto, sans-serif",
+    h1: {
+      fontFamily: "Tangerine, cursive",
+    },
   },
 });
 
